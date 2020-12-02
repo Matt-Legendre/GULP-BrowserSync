@@ -36,6 +36,33 @@ function jsTask() {
     }));
 }
 
+function browsersyncServe(cb) {
+  browsersync.init({
+    server: {
+      baseDir: '.'
+    }
+  });
+  cb();
+}
+
+function browsersyncReload(cb) {
+  browsersync.reload();
+  cb();
+}
+
+// Default Gulp Task
+exports.default = series(
+  scssTask,
+  jsTask,
+  browsersyncServe,
+  watchTask
+);
+
+// Watch Task
+function watchTask() {
+  watch('*.html', browsersyncReload);
+  watch(['app/**/*.scss', 'app/**/*.js'], series(scssTask, jsTask, browsersyncReload));
+}
 
 const testString = 'This is a test!';
 
