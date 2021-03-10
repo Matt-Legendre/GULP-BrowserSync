@@ -34,7 +34,9 @@ h3 {
 h1 {
    font-size: calc(2rem + 2vw)
 }
-
+#title {
+   font-weight: 500;
+}
 .box {
    position: relative;
    background-color: #3a5097;
